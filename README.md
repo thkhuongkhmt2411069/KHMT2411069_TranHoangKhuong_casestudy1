@@ -1,1 +1,0 @@
-# KHMT2411069_TranHoangKhuong_casestudy1
