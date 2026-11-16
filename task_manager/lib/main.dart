@@ -103,6 +103,22 @@ class _TransactionHomeScreenState extends State<TransactionHomeScreen> {
   DateTime date = DateTime(2025, 4, 12);
   String note = 'Ăn trưa';
 
+  double get totalIncome {
+  return type == 'Thu nhập'
+      ? (double.tryParse(amount) ?? 0)
+      : 0;
+}
+
+double get totalExpense {
+  return type == 'Chi tiêu'
+      ? (double.tryParse(amount) ?? 0)
+      : 0;
+}
+
+double get balance {
+  return totalIncome - totalExpense;
+}
+
   Future<void> openAddScreen() async {
     final result = await Navigator.push(
       context,
@@ -176,9 +192,69 @@ class _TransactionHomeScreenState extends State<TransactionHomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            
             const SizedBox(height: 20),
-            Card(
-              elevation: 2,
+
+Container(
+  width: double.infinity,
+  padding: const EdgeInsets.all(20),
+  decoration: BoxDecoration(
+    color: primaryBlue,
+    borderRadius: BorderRadius.circular(16),
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        'Số dư hiện tại',
+        style: TextStyle(color: Colors.white70),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        '${balance.toStringAsFixed(0)} đ',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ],
+  ),
+),
+
+const SizedBox(height: 20),
+
+Container(
+  width: double.infinity,
+  padding: const EdgeInsets.all(20),
+  decoration: BoxDecoration(
+    color: primaryBlue,
+    borderRadius: BorderRadius.circular(16),
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        'Số dư hiện tại',
+        style: TextStyle(color: Colors.white70),
+      ),
+      const SizedBox(height: 8),
+      Text(
+        '${balance.toStringAsFixed(0)} đ',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ],
+  ),
+),
+
+const SizedBox(height: 20),
+Card(
+  elevation: 2,
+      
               child: ListTile(
                 leading: CircleAvatar(
                   backgroundColor: type == 'Chi tiêu'
